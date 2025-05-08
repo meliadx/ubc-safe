@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="UBC safe"
+run/main_scene="uid://bcyvt7r05n2xq"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [rendering]
 
