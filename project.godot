@@ -15,6 +15,10 @@ run/main_scene="uid://bcyvt7r05n2xq"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://assets/icon.svg"
 
+[layer_names]
+
+2d_physics/layer_1="Physics Layer 1"
+
 [rendering]
 
 renderer/rendering_method="mobile"
