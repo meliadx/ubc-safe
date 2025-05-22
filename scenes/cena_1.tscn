@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcyvt7r05n2xq"]
 
-[ext_resource type="Script" uid="uid://tbsmal4rtldk" path="res://scenes/player.gd" id="1_m40bd"]
+[ext_resource type="Script" uid="uid://cb30crfx25q8h" path="res://scenes/player.gd" id="1_m40bd"]
 [ext_resource type="Texture2D" uid="uid://ban8yiofpksnu" path="res://assets/UBC_Safe_-_Char.webp" id="2_lub4b"]
 [ext_resource type="Texture2D" uid="uid://ctrq7fi0gi5xu" path="res://assets/tileset-sala1.webp" id="3_lub4b"]
 
