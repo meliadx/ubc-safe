@@ -6,11 +6,12 @@ var logic_map = []
 func _ready():
 	generate_logic_map()
 	var start = world_to_map($Player.global_position)
-	var end = Vector2i(10, 5) # exemplo: destino na célula (10,5)
+	var end = Vector2i(10, 5) 
 
 	var path = dijkstra(start, end)
 	if path:
 		print("Caminho encontrado: ", path)
+		$Player.follow_path(path)
 	else:
 		print("Nenhum caminho possível.")
 
@@ -29,7 +30,7 @@ func generate_logic_map():
 			var tile_pos = Vector2i(x + bounds.position.x, y + bounds.position.y)
 			var tile_data = tilemap.get_cell_tile_data(0, tile_pos)
 
-			if tile_data and tile_data.get_collision_count() > 0:
+			if tile_data and tile_data.get_collision_polygons_count(0) > 0:
 				logic_map[y].append(1) # Obstáculo
 			else:
 				logic_map[y].append(0) # Livre

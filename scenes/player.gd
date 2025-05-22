@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var Speed : float = 50.0
+@export var Speed : float = 20.0
 
 var path : Array = []
 var current_target_index = 0
@@ -9,7 +9,7 @@ var auto_move = false
 func _physics_process(delta: float) -> void:
 	if auto_move and path.size() > 0 and current_target_index < path.size():
 		var tile_pos = path[current_target_index]
-		var target = get_parent().get_node("Floor2TileMap").map_to_local(tile_pos) + Vector2(8, 8) # centro do tile
+		var target = get_parent().get_node("Floor2TileMap").map_to_local(tile_pos) + Vector2(8, 8) 
 		var direction = (target - global_position).normalized()
 		velocity = direction * Speed
 
