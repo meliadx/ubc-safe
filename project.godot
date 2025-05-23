@@ -10,10 +10,20 @@ config_version=5
 
 [application]
 
-config/name="UBC safe"
+config/name="simulador-rotas-fuga"
+run/main_scene="uid://2ux82l50pnmc"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=128
+window/size/viewport_height=64
+window/size/window_width_override=1024
+window/size/window_height_override=512
+window/stretch/mode="viewport"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
