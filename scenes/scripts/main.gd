@@ -97,3 +97,11 @@ func get_neighbors(pos: Vector2i, width: int, height: int) -> Array:
 		if n.x >= 0 and n.x < width and n.y >= 0 and n.y < height:
 			neighbors.append(n)
 	return neighbors
+
+
+func _on_commons_stairs_2_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_common_stairs_1_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

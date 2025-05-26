@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://2ux82l50pnmc"]
+[gd_scene load_steps=13 format=3 uid="uid://2ux82l50pnmc"]
 
 [ext_resource type="Script" uid="uid://b1sd5aovfdu0h" path="res://scenes/scripts/main.gd" id="1_h2i87"]
 [ext_resource type="Texture2D" uid="uid://c6h2147iq31c0" path="res://assets/floor2.png" id="1_mxxu5"]
@@ -9085,8 +9085,14 @@ sources/0 = SubResource("TileSetAtlasSource_px5mv")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k883f"]
 size = Vector2(1, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdlju"]
+size = Vector2(13, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4gqv"]
+size = Vector2(6, 11)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y0ba"]
-size = Vector2(6, 2)
+size = Vector2(6, 12)
 
 [node name="Floor2" type="Node2D"]
 script = ExtResource("1_h2i87")
@@ -9111,14 +9117,30 @@ visible = false
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_k883f")
 
-[node name="CommonStairs1" type="Area2D" parent="."]
+[node name="EmergencyStairs" type="Area2D" parent="."]
+script = ExtResource("5_kdlju")
 
-[node name="StairTrigger" type="CollisionShape2D" parent="CommonStairs1"]
-position = Vector2(10, 23)
+[node name="StairsCollisionShape2D3" type="CollisionShape2D" parent="EmergencyStairs"]
+position = Vector2(120.5, 31.5)
+shape = SubResource("RectangleShape2D_kdlju")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="CommonsStairs2" type="Area2D" parent="."]
+script = ExtResource("5_kdlju")
+
+[node name="StairsCollisionShape2D1" type="CollisionShape2D" parent="CommonsStairs2"]
+position = Vector2(10, 57.5)
+shape = SubResource("RectangleShape2D_q4gqv")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="CommonStairs1" type="Area2D" parent="."]
+script = ExtResource("5_kdlju")
+
+[node name="StairsCollisionShape2D1" type="CollisionShape2D" parent="CommonStairs1"]
+position = Vector2(10, 28)
 shape = SubResource("RectangleShape2D_7y0ba")
 one_way_collision_margin = 0.0
 debug_color = Color(0, 0.6, 0.701961, 0)
-script = ExtResource("5_kdlju")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(10.2188, 5.21875)
@@ -9126,3 +9148,7 @@ scale = Vector2(0.59375, 0.59375)
 texture = ExtResource("5_k883f")
 hframes = 2
 vframes = 2
+
+[connection signal="body_entered" from="EmergencyStairs" to="EmergencyStairs" method="_on_body_entered"]
+[connection signal="body_entered" from="CommonsStairs2" to="CommonsStairs2" method="_on_body_entered"]
+[connection signal="body_entered" from="CommonStairs1" to="CommonStairs1" method="_on_body_entered"]
