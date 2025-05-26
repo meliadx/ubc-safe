@@ -10,9 +10,8 @@ O UbcSafe é um aplicativo desenvolvido para auxiliar estudantes universitários
 
 #👨‍💻 Tecnologias Utilizadas
 
-- C# (linguagem principal)
-- Godot Engine (motor gráfico para desenvolvimento da simulação)
 - GDScript (necessário para componentes específicos do Godot)
+- Godot Engine (motor gráfico para desenvolvimento da simulação)
 - Algoritmo de Dijkstra (implementado para calcular rotas)
 - GitHub (controle de versão e colaboração)
 
@@ -41,11 +40,12 @@ O UbcSafe é um aplicativo desenvolvido para auxiliar estudantes universitários
 
 
 ## 📸 Demonstrações
-Inclua aqui prints, gifs ou vídeos mostrando a interface ou o funcionamento do sistema:
+![WhatsApp Image 2025-05-25 at 13 14 18](https://github.com/user-attachments/assets/d6ce7ca7-3126-4243-8f2c-a3dcaedff04f)
+
 
 - Modelo 1 de Interface:
-- Menu Inicial: ![image](https://github.com/user-attachments/assets/e9ba2232-505a-4733-8ffe-966df731d712)
-- Simulação em andamento: ""incluir""
+- 
+- 
 
 ---
 
