@@ -20,17 +20,18 @@ O UbcSafe é um aplicativo desenvolvido para auxiliar estudantes universitários
 
 ## 🗂️ Estrutura do Projeto
 
-ubc-Safe/
-│── scenes
-│  	├── floor1.tscn
-│  	├── floor2.tscn
-│ 	├── floor3.tscn
-│  	└── scripts
-│		└── scripts das entidades do jogo em gd.
-│── assets/
-│   └── images, icons, mapas
-│── README.md
-│─ project.godot
+📂 ubc-Safe  
+├── 📁 scenes  
+│   ├── floor1.tscn  
+│   ├── floor2.tscn  
+│   ├── floor3.tscn  
+│   └── 📁 scripts  
+│       └── scripts das entidades do jogo em GDScript  
+├── 📁 assets  
+│   └── images, icons, mapas  
+├── 📄 README.md  
+└── 📄 project.godot  
+
 ```
 
 ---
