@@ -23,10 +23,6 @@ window/size/window_width_override=1024
 window/size/window_height_override=512
 window/stretch/mode="viewport"
 
-[global_group]
-
-Danger=""
-
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
