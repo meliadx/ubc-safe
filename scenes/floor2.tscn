@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2ux82l50pnmc"]
+[gd_scene load_steps=15 format=3 uid="uid://2ux82l50pnmc"]
 
 [ext_resource type="Script" uid="uid://b1sd5aovfdu0h" path="res://scenes/scripts/main.gd" id="1_h2i87"]
 [ext_resource type="Texture2D" uid="uid://c6h2147iq31c0" path="res://assets/floor2.png" id="1_mxxu5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwchyva811qik" path="res://assets/player.png" id="3_w7y38"]
 [ext_resource type="Texture2D" uid="uid://76pf0ebemw5u" path="res://assets/fire1.png" id="5_k883f"]
 [ext_resource type="Script" uid="uid://1nv0c7caect8" path="res://scenes/scripts/stair_trigger.gd" id="5_kdlju"]
+[ext_resource type="Script" uid="uid://dn2q2kuhigmlh" path="res://scenes/scripts/gameover_trigger.gd" id="6_7y0ba"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_px5mv"]
 texture = ExtResource("1_mxxu5")
@@ -9094,6 +9095,9 @@ size = Vector2(6, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y0ba"]
 size = Vector2(6, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uh6vs"]
+size = Vector2(6, 6)
+
 [node name="Floor2" type="Node2D"]
 script = ExtResource("1_h2i87")
 
@@ -9142,12 +9146,20 @@ shape = SubResource("RectangleShape2D_7y0ba")
 one_way_collision_margin = 0.0
 debug_color = Color(0, 0.6, 0.701961, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(10.2188, 5.21875)
-scale = Vector2(0.59375, 0.59375)
+[node name="Fire" type="Area2D" parent="." groups=["Danger"]]
+position = Vector2(119, 17)
+script = ExtResource("6_7y0ba")
+
+[node name="FireSprite2D" type="Sprite2D" parent="Fire"]
+scale = Vector2(1.13021, 0.963542)
 texture = ExtResource("5_k883f")
 hframes = 2
 vframes = 2
+
+[node name="FireCollisionShape2D" type="CollisionShape2D" parent="Fire"]
+physics_interpolation_mode = 2
+shape = SubResource("RectangleShape2D_uh6vs")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [connection signal="body_entered" from="EmergencyStairs" to="EmergencyStairs" method="_on_body_entered"]
 [connection signal="body_entered" from="CommonsStairs2" to="CommonsStairs2" method="_on_body_entered"]

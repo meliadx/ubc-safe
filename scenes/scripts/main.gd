@@ -52,10 +52,21 @@ func generate_logic_map():
 			var tile_pos = Vector2i(x + bounds.position.x, y + bounds.position.y)
 			var tile_data = tilemap.get_cell_tile_data(0, tile_pos)
 
+			var is_obstacle = false
+
+			# Verifica se o tile tem colisão
 			if tile_data and tile_data.get_collision_polygons_count(0) > 0:
-				logic_map[y].append(1) # Tem colisão = obstáculo
-			else:
-				logic_map[y].append(0) # Livre
+				is_obstacle = true
+
+			# Verifica se há fogo nesta posição (grupo "Danger")
+			var world_pos = tilemap.map_to_local(tile_pos)
+			for danger in get_tree().get_nodes_in_group("Danger"):
+				if danger.global_position.floor() == tilemap.to_global(world_pos).floor():
+					is_obstacle = true
+					break
+
+			# Marca 1 para obstáculo, 0 para livre
+			logic_map[y].append(1 if is_obstacle else 0)
 
 # Algoritmo de Dijkstra: calcula o menor caminho entre dois pontos
 func dijkstra(start: Vector2i, end: Vector2i) -> Array:

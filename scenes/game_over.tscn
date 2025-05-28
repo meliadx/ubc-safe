@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbkiv3hn1nmoj"]
+
+[ext_resource type="Script" uid="uid://cb30crfx25q8h" path="res://scenes/scripts/player.gd" id="1_wqhvx"]
+[ext_resource type="Texture2D" uid="uid://bwchyva811qik" path="res://assets/player.png" id="2_tbwuq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_racf3"]
+size = Vector2(1, 1)
+
+[node name="GameOver" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(144, 14)
+script = ExtResource("1_wqhvx")
+
+[node name="PlayerSprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(0.500001, -0.5)
+scale = Vector2(0.333333, 0.333333)
+texture = ExtResource("2_tbwuq")
+
+[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_racf3")
