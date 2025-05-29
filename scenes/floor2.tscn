@@ -9219,6 +9219,10 @@ position = Vector2(77, 17)
 scale = Vector2(-0.0078577, -0.00699577)
 texture = ExtResource("9_uh6vs")
 
+[node name="Line2D" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(1, 1, 0, 1)
+
 [connection signal="body_entered" from="EmergencyStairs" to="EmergencyStairs" method="_on_body_entered"]
 [connection signal="body_entered" from="CommonsStairs2" to="CommonsStairs2" method="_on_body_entered"]
 [connection signal="body_entered" from="CommonStairs1" to="CommonStairs1" method="_on_body_entered"]

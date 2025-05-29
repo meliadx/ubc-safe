@@ -2,13 +2,14 @@ extends Node2D
 
 @onready var tilemap = $Floor2TileMap
 var logic_map = [] # Aqui vai ser nossa matriz com 0 (livre) e 1 (obstáculo), baseada no tilemap
+var logic_offset = Vector2i() # Offset da posição inicial da matriz lógica em relação ao tilemap
 
 func _ready():
 	# Gera a matriz lógica do mapa, identificando onde pode e onde não pode andar
 	generate_logic_map()
 
 	# Pega a posição atual do player no formato do tilemap (coordenadas X e Y)
-	var start = world_to_map($Player.global_position)
+	var start = world_to_map($Player.global_position) - logic_offset
 
 	# Lista com os possíveis destinos
 	var exits = [
@@ -23,21 +24,27 @@ func _ready():
 
 	# Para cada destino, roda o Dijkstra e compara o tamanho do caminho
 	for exit in exits:
-		var path = dijkstra(start, exit)
+		var path = dijkstra(start, exit - logic_offset)
 		if path.size() > 0 and path.size() < shortest_length:
 			best_path = path
 			shortest_length = path.size()
 
 	# Se achou algum caminho viável, manda o player seguir ele
 	if best_path.size() > 0:
-		print("Melhor caminho: ", best_path)
-		$Player.follow_path(best_path)
+		# Adiciona o offset de volta para converter as posições para o mundo real
+		var world_path = []
+		for point in best_path:
+			var local_pos = tilemap.map_to_local(point + logic_offset)
+			var global_pos = tilemap.to_global(local_pos)
+			world_path.append(global_pos)
+		print("Melhor caminho: ", world_path)
+		$Player.follow_path(world_path)
 	else:
 		print("Nenhum caminho possível.")
 
 # Converte uma posição global do jogo para coordenada do tilemap
-func world_to_map(world_pos):
-	return tilemap.local_to_map(to_local(world_pos))
+func world_to_map(world_pos: Vector2) -> Vector2i:
+	return tilemap.local_to_map(world_pos)
 
 # Gera a matriz lógica do mapa, marcando onde é livre (0) e onde é parede (1)
 func generate_logic_map():
@@ -45,6 +52,7 @@ func generate_logic_map():
 	var width = bounds.size.x
 	var height = bounds.size.y
 
+	logic_offset = bounds.position
 	logic_map.resize(height)
 	for y in range(height):
 		logic_map[y] = []
@@ -135,6 +143,6 @@ func get_neighbors(pos: Vector2i, width: int, height: int) -> Array:
 		if n.x >= 0 and n.x < width and n.y >= 0 and n.y < height:
 			neighbors.append(n)
 	return neighbors
-	
+
 func _on_fire_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
