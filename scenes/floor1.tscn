@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy5oc3lt62je1"]
+[gd_scene load_steps=15 format=3 uid="uid://cy5oc3lt62je1"]
 
 [ext_resource type="Texture2D" uid="uid://c0htn071bkska" path="res://assets/floor1.png" id="1_ij88p"]
 [ext_resource type="Script" uid="uid://cb30crfx25q8h" path="res://scenes/scripts/player.gd" id="2_pjl1o"]
 [ext_resource type="Texture2D" uid="uid://bwchyva811qik" path="res://assets/player.png" id="3_55cqt"]
+[ext_resource type="Shader" uid="uid://nbfxa6rkt3xo" path="res://shaders/vhs.gdshader" id="4_55cqt"]
+[ext_resource type="Texture2D" uid="uid://dd8kxsd31x782" path="res://assets/icon.svg" id="5_63hnl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1aqqp"]
 texture = ExtResource("1_ij88p")
@@ -8963,6 +8965,34 @@ size = Vector2(10, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2gbh"]
 size = Vector2(10, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55cqt"]
+shader = ExtResource("4_55cqt")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.007
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.098
+shader_parameter/resolution = Vector2(1980, 1080)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.016
+shader_parameter/noise_opacity = 0.046
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.663
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.455
+
+[sub_resource type="GDScript" id="GDScript_63hnl"]
+script/source = "extends ColorRect
+"
+
 [node name="Floor1" type="Node2D"]
 
 [node name="Floor1TileMap" type="TileMap" parent="."]
@@ -8975,8 +9005,11 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 2, 196608,
 position = Vector2(110, 33)
 script = ExtResource("2_pjl1o")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+
 [node name="PlayerSprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(0.500001, -0.5)
+position = Vector2(0.5, -0.5)
 scale = Vector2(0.333333, 0.333333)
 texture = ExtResource("3_55cqt")
 
@@ -9009,6 +9042,26 @@ position = Vector2(46, 58.5)
 shape = SubResource("RectangleShape2D_e2gbh")
 one_way_collision_margin = 0.0
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="shaders" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="vhs" type="ColorRect" parent="shaders"]
+visible = false
+material = SubResource("ShaderMaterial_55cqt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_63hnl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(127, 33)
+scale = Vector2(-0.0078577, -0.00699577)
+texture = ExtResource("5_63hnl")
 
 [connection signal="body_entered" from="EmergencyExit" to="EmergencyExit" method="_on_body_entered"]
 [connection signal="body_entered" from="CommonsExit2" to="CommonsExit2" method="_on_body_entered"]

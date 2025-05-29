@@ -10,11 +10,11 @@ func _ready():
 	# Pega a posição atual do player no formato do tilemap (coordenadas X e Y)
 	var start = world_to_map($Player.global_position)
 
-	# Lista com os possíveis destinos (três saídas no exemplo)
+	# Lista com os possíveis destinos
 	var exits = [
-		Vector2i(123, 5),
-		Vector2i(2, 8),
-		Vector2i(12, 1)
+		Vector2i(10, 60),
+		Vector2i(10, 22),
+		Vector2i(126, 33)
 	]
 
 	# Aqui vamos guardar o melhor caminho encontrado e o tamanho dele
@@ -135,3 +135,6 @@ func get_neighbors(pos: Vector2i, width: int, height: int) -> Array:
 		if n.x >= 0 and n.x < width and n.y >= 0 and n.y < height:
 			neighbors.append(n)
 	return neighbors
+	
+func _on_fire_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

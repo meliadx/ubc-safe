@@ -1,23 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://crhm3umihglx4"]
+[gd_scene load_steps=3 format=3 uid="uid://crhm3umihglx4"]
 
-[ext_resource type="Script" uid="uid://cb30crfx25q8h" path="res://scenes/scripts/player.gd" id="1_3d26k"]
-[ext_resource type="Texture2D" uid="uid://bwchyva811qik" path="res://assets/player.png" id="2_p7m4f"]
+[ext_resource type="Script" uid="uid://56hwnn0ifav1" path="res://scenes/scripts/g_oreset.gd" id="1_3d26k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvfni"]
-size = Vector2(1, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_bvfni"]
+line_spacing = 10.0
+font_size = 12
+font_color = Color(0.2, 0.701961, 0.231373, 1)
+outline_size = 2
+outline_color = Color(0, 0.34902, 0.152941, 1)
 
 [node name="End" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(138, 8)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GObg" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 88.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.254902, 0.243137, 1)
+
+[node name="GOLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 128.0
+offset_bottom = 29.0
+text = "You win!"
+label_settings = SubResource("LabelSettings_bvfni")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GOreset" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 37.0
+offset_right = 123.0
+offset_bottom = 68.0
+scale = Vector2(0.5, 0.5)
+text = "Try again"
+icon_alignment = 1
 script = ExtResource("1_3d26k")
-
-[node name="PlayerSprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(0.500001, -0.5)
-scale = Vector2(0.333333, 0.333333)
-texture = ExtResource("2_p7m4f")
-
-[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="Player"]
-visible = false
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_bvfni")

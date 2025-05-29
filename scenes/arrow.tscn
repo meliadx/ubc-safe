@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://buaq4c26322pp"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Arrow" type="Sprite2D" parent="."]
+centered = false
+offset = Vector2(512, 512)
