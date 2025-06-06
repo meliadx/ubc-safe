@@ -1,43 +1,45 @@
+# Player.gd - Anexado ao nó Player
 extends CharacterBody2D
 
-@export var Speed : float = 20.0
+@export var Speed : float = 20.0 # Ajuste a velocidade conforme necessário
 
-var path : Array = []
-var current_target_index = 0
-var auto_move = false
+# As variáveis relacionadas ao auto_move e ao caminho não são mais necessárias aqui
+# var current_path_nodes : Array = []
+# var current_target_index = 0
+# var auto_move = false
+
+# A referência ao tilemap_node também não é mais necessária para este script simplificado
+# @onready var tilemap_node: TileMap = get_parent().get_node_or_null("Floor2TileMap") if get_parent() else null
 
 func _physics_process(delta: float) -> void:
-	if auto_move and path.size() > 0 and current_target_index < path.size():
-		var tile_pos = path[current_target_index]
-		var target = get_parent().get_node("Floor2TileMap").map_to_local(tile_pos) + Vector2(8, 8) 
-		var direction = (target - global_position).normalized()
-		velocity = direction * Speed
-
-		if global_position.distance_to(target) < 2.0:
-			current_target_index += 1
-			if current_target_index >= path.size():
-				auto_move = false
-				velocity = Vector2.ZERO
+	# Movimento manual por teclado
+	var input_direction = Vector2.ZERO
+	if Input.is_action_pressed("ui_right"):
+		input_direction.x += 1
+	if Input.is_action_pressed("ui_left"):
+		input_direction.x -= 1
+	if Input.is_action_pressed("ui_down"):
+		input_direction.y += 1
+	if Input.is_action_pressed("ui_up"):
+		input_direction.y -= 1
+	
+	if input_direction != Vector2.ZERO:
+		input_direction = input_direction.normalized()
+		velocity = input_direction * Speed
 	else:
-		# Movimento manual por teclado
-		var direction = Vector2.ZERO
-		if Input.is_action_pressed("ui_right"):
-			direction.x += 1
-		if Input.is_action_pressed("ui_left"):
-			direction.x -= 1
-		if Input.is_action_pressed("ui_down"):
-			direction.y += 1
-		if Input.is_action_pressed("ui_up"):
-			direction.y -= 1
-		direction = direction.normalized()
-		velocity = direction * Speed
+		# Para o jogador se não houver input.
+		# Se quiser um movimento mais suave ao parar, use move_toward:
+		# velocity = velocity.move_toward(Vector2.ZERO, ALGUMA_FRICCAO * delta)
+		velocity = Vector2.ZERO 
 
 	move_and_slide()
 
-func follow_path(new_path: Array):
-	path = new_path
-	current_target_index = 0
-
-	var tilemap = get_parent().get_node("Floor2TileMap")
-	var tile_pos = tilemap.local_to_map(global_position)
-	var tile_id = tilemap.get_cell_source_id(0, tile_pos)
+# A função follow_path não é mais necessária, então pode ser removida.
+# func follow_path(new_path_tile_coords: Array):
+#	 print("Player: Recebeu novo caminho com ", new_path_tile_coords.size(), " nós.")
+#	 current_path_nodes = new_path_tile_coords
+#	 current_target_index = 0
+#	 if not current_path_nodes.is_empty():
+#		 auto_move = true
+#	 else:
+#		 auto_move = false
